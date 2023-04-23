@@ -43,6 +43,8 @@ mod tests {
 
 	#[test]
 	fn should_be_3000_if_there_is_no_environment_variable() {
+		env::remove_var("PORT");
+
 		let port = get_port();
 
 		assert_eq!(port, 3000)
@@ -53,6 +55,8 @@ mod tests {
 
 		let port = get_port();
 
-		assert_eq!(port, 2121)
+		assert_eq!(port, 2121);
+
+		env::remove_var("PORT");
 	}
 }
