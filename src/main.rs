@@ -50,7 +50,7 @@ mod tests {
 		assert_eq!(port, 3000)
 	}
 	#[test]
-	fn should_be_the_value_set_in_the_variable() {
+	fn should_be_the_value_set_in_the_environment_variable() {
 		env::set_var("PORT", "2121");
 
 		let port = get_port();
