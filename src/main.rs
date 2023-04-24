@@ -9,6 +9,7 @@ async fn main() {
 	// set application routes
 	let app = Router::new().route("/", get(hello_world));
 
+	println!("Go to http://localhost:{port}/ to see your amazing app");
 	// run app with hyper
 	let address = SocketAddr::from(([127, 0, 0, 1], port));
 	axum::Server::bind(&address)
@@ -30,7 +31,6 @@ fn get_port() -> u16 {
 		Err(error) => {
 			let default_port: u16 = 3000;
 			println!("$PORT is not set, using default port {default_port}: {error}");
-			println!("Go to http://localhost:{default_port}/ to see your amazing app");
 			default_port
 		}
 	}
