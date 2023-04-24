@@ -11,7 +11,7 @@ async fn main() {
 
 	println!("Go to http://localhost:{port}/ to see your amazing app");
 	// run app with hyper
-	let address = SocketAddr::from(([127, 0, 0, 1], port));
+	let address = SocketAddr::from(([0, 0, 0, 0], port));
 	axum::Server::bind(&address)
 		.serve(app.into_make_service())
 		.await
