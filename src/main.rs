@@ -1,13 +1,20 @@
-use axum::{routing::get, Router};
+use axum::{
+	routing::{get, post},
+	Router,
+};
 use std::env;
 use std::net::SocketAddr;
+
+mod questions;
 
 #[tokio::main]
 async fn main() {
 	let port = get_port();
 
 	// set application routes
-	let app = Router::new().route("/", get(hello_world));
+	let app = Router::new()
+		.route("/", get(hello_world))
+		.route("/api/graphql", post(questions::graphql_handler));
 
 	println!("Go to http://localhost:{port}/ to see your amazing app");
 	// run app with hyper
