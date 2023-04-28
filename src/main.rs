@@ -1,4 +1,7 @@
-use axum::{routing::get, Router};
+use axum::{
+	routing::{get, post},
+	Router,
+};
 use std::env;
 use std::net::SocketAddr;
 
@@ -11,7 +14,7 @@ async fn main() {
 	// set application routes
 	let app = Router::new()
 		.route("/", get(hello_world))
-		.route("/api/graphql", get(questions::graphql_handler));
+		.route("/api/graphql", post(questions::graphql_handler));
 
 	println!("Go to http://localhost:{port}/ to see your amazing app");
 	// run app with hyper

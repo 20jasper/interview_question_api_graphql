@@ -1,4 +1,5 @@
 use async_graphql::{EmptyMutation, EmptySubscription, Object, Schema};
+use async_graphql_axum::{GraphQLRequest, GraphQLResponse};
 
 struct Query;
 
@@ -10,15 +11,12 @@ impl Query {
 	}
 }
 
-pub async fn graphql_handler() -> String {
+/// takes in a request body and resolves all the fields in the GraphQL query
+pub async fn graphql_handler(req: GraphQLRequest) -> GraphQLResponse {
 	let schema = Schema::new(Query, EmptyMutation, EmptySubscription);
-	let res = schema
-		.execute("{ add(a: 10, b: 20) }")
-		.await;
 
-	let json = serde_json::to_string(&res);
-	match json {
-		Ok(json) => json,
-		Err(error) => panic!("failed to parse JSON: {error}"),
-	}
+	schema
+		.execute(req.into_inner())
+		.await
+		.into()
 }
