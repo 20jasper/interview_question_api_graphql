@@ -43,7 +43,9 @@ jobs:
           git config --local user.email github-actions@github.com
           git config --local user.name github-actions
           git add .
-          echo "COMMIT_RESPONSE=$(git commit -m 'Updating graphql docs!')" >> $GITHUB_OUTPUT
+          echo "COMMIT_RESPONSE<<EOF" >> $GITHUB_ENV
+          git commit -m "Updating graphql docs!"" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
 
       - name: Push files
         working-directory: ./${{ env.TARGET_REPO_NAME }}
