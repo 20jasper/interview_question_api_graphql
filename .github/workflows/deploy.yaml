@@ -29,11 +29,7 @@ jobs:
         run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_CLI_TOKEN }}
-
-      - name: Install Graphdoc CLI
-        run: npm install -g @2fd/graphdoc
-      - name: Generate GraphQL docs
-        run: npx graphdoc -e https://banki-api.up.railway.app/api/graphql -o ./doc/schema
-
-      - name: Check if docs are here
-        run: ls ./doc/schema
+          
+  publish-docs:
+    uses: ./.github/workflows/publish-docs.yaml
+    needs: deploy-prod
