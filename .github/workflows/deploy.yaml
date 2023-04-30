@@ -28,4 +28,7 @@ jobs:
 
   publish-docs:
     uses: ./.github/workflows/publish-docs.yaml
+    secrets:
+      GITHUB_PAT: ${{ secrets.DOCS_PAT }}
     needs: deploy-prod
+        
