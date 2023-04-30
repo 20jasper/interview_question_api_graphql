@@ -30,11 +30,15 @@ jobs:
       - name: Generate GraphQL docs
         run: npx graphdoc -e https://banki-api.up.railway.app/api/graphql -o ./${{ env.TARGET_REPO_NAME }}/docs/graphql -f
 
-      - name: Push files
+      - name: Commit files
         working-directory: ./${{ env.TARGET_REPO_NAME }}
         run: |
           git config --local user.email github-actions@github.com
           git config --local user.name github-actions
           git add .
           git commit -m "Updating graphql docs!"
-          git push
+      - name: GitHub Push
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.DOCS_BOT_TOKEN }}
+
