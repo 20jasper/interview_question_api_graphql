@@ -41,9 +41,18 @@ jobs:
           git config --local user.email github-actions@github.com
           git config --local user.name github-actions
 
-      - name: Push files
+      - name: Add files
         working-directory: ./${{ env.TARGET_REPO_NAME }}
         run: |
           git add .
+
+      - name: Commit files
+        working-directory: ./${{ env.TARGET_REPO_NAME }}
+        continue-on-error: true
+        run: |
           git commit -m "Updating graphql docs!"
+
+      - name: Push files
+        working-directory: ./${{ env.TARGET_REPO_NAME }}
+        run: |
           git push
