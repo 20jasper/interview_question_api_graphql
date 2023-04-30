@@ -8,11 +8,12 @@ on:
 jobs:
   deploy-prod:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     environment: prod
 
     env: 
       BASE_URL: https://banki-api.up.railway.app
-      GRAPHQL_ENDPOINT: ${{ BASE_URL }}/api/graphql
+      GRAPHQL_ENDPOINT: ${{ github.env.BASE_URL }}/api/graphql
 
     steps:
       - name: Setup and verify
@@ -24,7 +25,7 @@ jobs:
       - name: Deploy
         run: railway up
         env:
-          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_CLI_TOKEN }}
 
       - name: Generate GraphQL docs
         run: npx graphdoc -e https://banki-api.up.railway.app/api/graphql -o ./doc/schema
