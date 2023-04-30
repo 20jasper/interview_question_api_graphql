@@ -54,15 +54,8 @@ jobs:
           '$(git commit -m "Updating graphql docs!")'
           EOF
           ) >> $GITHUB_ENV
-        
-          # DELIMITER=EOF
-          # echo "COMMIT_RESPONSE<<$DELIMITER" >> "$GITHUB_ENV"
-          # git commit -m "Updating graphql docs!" >> $GITHUB_ENV
-          # echo "$DELIMITER" >> $GITHUB_ENV
 
       - name: Push files
         working-directory: ./${{ env.TARGET_REPO_NAME }}
-        # if remote is not up to date
-        if: ${{ !contains(env.COMMIT_RESPONSE, 'Your branch is up to date') }}
         run: git push
 
