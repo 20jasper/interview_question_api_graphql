@@ -1,4 +1,4 @@
-name: CI
+name: verify
 
 on:
   pull_request:
@@ -15,7 +15,7 @@ env:
 jobs:
   ci:
     timeout-minutes: 10
-    name: CI 
+    name: verify 
     runs-on: ubuntu-latest 
 
     steps:
