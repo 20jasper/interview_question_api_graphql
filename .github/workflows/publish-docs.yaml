@@ -37,10 +37,17 @@ jobs:
 
       - name: Commit files
         working-directory: ./${{ env.TARGET_REPO_NAME }}
+        # sets user as github actions, adds and commits files, then saves output
+        # to `COMMIT_RESPONSE`
         run: |
           git config --local user.email github-actions@github.com
           git config --local user.name github-actions
           git add .
-          git commit -m "Updating graphql docs!"
-          git push
+          echo "COMMIT_RESPONSE=$(git commit -m 'Updating graphql docs!')" >> $GITHUB_OUTPUT
+
+      - name: Push files
+        working-directory: ./${{ env.TARGET_REPO_NAME }}
+        # if remote is not up to date
+        if: ${{ !contains(env.COMMIT_RESPONSE, 'Your branch is up to date') }}
+        run: git push
 
