@@ -16,9 +16,12 @@ jobs:
       GRAPHQL_ENDPOINT: ${{ github.env.BASE_URL }}/api/graphql
 
     steps:
+      - name: checkout code
+        uses: actions/checkout@v3
+
       - name: Setup and verify
         uses: ./verify.yaml
-
+        
       - name: Install Railway
         run: npm i -g @railway/cli
 
@@ -29,6 +32,6 @@ jobs:
 
       - name: Generate GraphQL docs
         run: npx graphdoc -e https://banki-api.up.railway.app/api/graphql -o ./doc/schema
-      
+        
       - name: Check if docs are here
         run: ls ./doc/schema
