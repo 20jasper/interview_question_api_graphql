@@ -34,8 +34,8 @@ jobs:
       - name: Push files
         working-directory: ./${{ env.TARGET_REPO_NAME }}
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          git config --local user.email github-actions@github.com
+          git config --local user.name github-actions
           git add .
           git commit -m "Updating graphql docs!"
           git push
