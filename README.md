@@ -7,7 +7,7 @@ Table of contents
 </summary>
 
 - [Interview Question API](#interview-question-api)
-	- [Continuous Integration](#continuous-integration)
+  - [Continuous Integration](#continuous-integration)
 </details>
 
 
@@ -29,7 +29,7 @@ Table of contents
   </tr>
   <tr>
     <td><code>deploy.yaml</code></td>
-    <td>Calls <code>verify</code>, deploys production build to railway, then calls `publish-docs`</td>
+    <td>Calls <code>verify</code>, deploys production build to railway, then calls <code>publish-docs</code></td>
     <td>Runs on push to main</td>
   </tr>
   <tr>
