@@ -35,7 +35,8 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -am "Updating graphql docs!"
+          git add .
+          git commit -m "Updating graphql docs!"
           git push
 
 
