@@ -24,7 +24,6 @@ jobs:
         with: 
           repository: ${{ env.TARGET_REPO_USER }}/${{ env.TARGET_REPO_NAME }}
           path: ${{ env.TARGET_REPO_NAME }}
-          token: ${{ secrets.DOCS_BOT_TOKEN }}
 
       - name: Install Graphdoc CLI
         run: npm install -g @2fd/graphdoc
@@ -34,8 +33,8 @@ jobs:
       - name: Push files
         working-directory: ./${{ env.TARGET_REPO_NAME }}
         run: |
-          git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "github-actions[bot]"
+          git config --local user.email github-actions@github.com
+          git config --local user.name github-actions
           git add .
           git commit -m "Updating graphql docs!"
           git push
