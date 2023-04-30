@@ -41,17 +41,14 @@ jobs:
           git config --local user.email github-actions@github.com
           git config --local user.name github-actions
 
-      - name: Add files
-        working-directory: ./${{ env.TARGET_REPO_NAME }}
-        run: |
-          git add .
-
-      - name: Commit files
+      - name: Push files
         working-directory: ./${{ env.TARGET_REPO_NAME }}
         env:
           SUCCESS_MESSAGE: "::notice title='Docs Updated Successful'::GraphQL docs were successfully updated. Check the following link to see changes https://github.com/20jasper/interview_question_api_graphql_docs"
           FAILURE_MESSAGE: "::notice title='Docs Not Updated'::GraphQL docs were not updated. If no changes were made to the GraphQL schema, this notice can be safely ignored"
         run: |
+          git add .
+
           # if there are changes between origin and local
           if !git diff-index --quiet HEAD; then
             git commit -m "update GraphQL Docs!"
@@ -60,8 +57,3 @@ jobs:
           else
             echo ${{ env.FAILURE_MESSAGE }}
           fi
-
-      - name: Push files
-        working-directory: ./${{ env.TARGET_REPO_NAME }}
-        run: |
-          git push
