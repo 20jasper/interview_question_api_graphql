@@ -41,21 +41,9 @@ jobs:
           git config --local user.email github-actions@github.com
           git config --local user.name github-actions
 
-      - name: Add files
+      - name: Push files
         working-directory: ./${{ env.TARGET_REPO_NAME }}
         run: |
           git add .
-          
-      - name: Commit files
-        working-directory: ./${{ env.TARGET_REPO_NAME }}
-        # eof is required since git commit returns a multiline string
-        run: |
-          COMMIT_MESSAGE=$(cat << EOF
-          '$(git commit -m "Updating graphql docs!")'
-          EOF
-          ) >> $GITHUB_ENV
-
-      - name: Push files
-        working-directory: ./${{ env.TARGET_REPO_NAME }}
-        run: git push
-
+          git commit -m "Updating graphql docs!"
+          git push
