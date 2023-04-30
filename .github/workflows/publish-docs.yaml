@@ -51,7 +51,7 @@ jobs:
         # eof is required since git commit returns a multiline string
         run: |
           DELIMITER=EOF
-          echo "COMMIT_RESPONSE << $DELIMITER" >> "$GITHUB_ENV"
+          echo "COMMIT_RESPONSE<<$DELIMITER" >> "$GITHUB_ENV"
           git commit -m "Updating graphql docs!" >> $GITHUB_ENV
           echo "$DELIMITER" >> $GITHUB_ENV
 
