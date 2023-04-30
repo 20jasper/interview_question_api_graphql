@@ -48,9 +48,18 @@ jobs:
 
       - name: Commit files
         working-directory: ./${{ env.TARGET_REPO_NAME }}
-        continue-on-error: true
+        env:
+          SUCCESS_MESSAGE: "::notice title='Docs Updated Successful'::GraphQL docs were successfully updated. Check the following link to see changes https://github.com/20jasper/interview_question_api_graphql_docs"
+          FAILURE_MESSAGE: "::notice title='Docs Not Updated'::GraphQL docs were not updated. If no changes were made to the GraphQL schema, this notice can be safely ignored"
         run: |
-          git commit -m "Updating graphql docs!"
+          # if there are changes between origin and local
+          if !git diff-index --quiet HEAD; then
+            git commit -m "update GraphQL Docs!"
+            git push
+            echo ${{ env.SUCCESS_MESSAGE }}
+          else
+            echo ${{ env.FAILURE_MESSAGE }}
+          fi
 
       - name: Push files
         working-directory: ./${{ env.TARGET_REPO_NAME }}
