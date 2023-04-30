@@ -15,10 +15,6 @@ jobs:
     timeout-minutes: 15
     environment: prod
 
-    env: 
-      BASE_URL: https://banki-api.up.railway.app
-      GRAPHQL_ENDPOINT: ${{ github.env.BASE_URL }}/api/graphql
-
     steps:
       - name: checkout code
         uses: actions/checkout@v3
@@ -29,7 +25,7 @@ jobs:
         run: railway up
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_CLI_TOKEN }}
-          
+
   publish-docs:
     uses: ./.github/workflows/publish-docs.yaml
     needs: deploy-prod

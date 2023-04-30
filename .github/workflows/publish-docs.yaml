@@ -9,9 +9,12 @@ jobs:
     timeout-minutes: 10
     name: publish docs 
     runs-on: ubuntu-latest 
-    env:
+    env: 
+      BASE_URL: https://banki-api.up.railway.app
+      GRAPHQL_ENDPOINT: ${{ github.env.BASE_URL }}/api/graphql
       TARGET_REPO_USER: 20jasper
       TARGET_REPO_NAME: interview_question_api_graphql_docs
+
     steps:
       - name: checkout api repo
         uses: actions/checkout@v3
@@ -19,16 +22,16 @@ jobs:
       - name: checkout docs repo
         uses: actions/checkout@v3
         with: 
-          repository: ${{ github.env.TARGET_REPO_USER }}/${{ github.env.TARGET_REPO_NAME }}
-          path: ${{ github.env.TARGET_REPO_NAME }}
+          repository: ${{ env.TARGET_REPO_USER }}/${{ env.TARGET_REPO_NAME }}
+          path: ${{ env.TARGET_REPO_NAME }}
 
       - name: Install Graphdoc CLI
         run: npm install -g @2fd/graphdoc
       - name: Generate GraphQL docs
-        run: npx graphdoc -e https://banki-api.up.railway.app/api/graphql -o ./${{ github.env.TARGET_REPO_NAME }}/docs/graphql -f
+        run: npx graphdoc -e https://banki-api.up.railway.app/api/graphql -o ./${{ env.TARGET_REPO_NAME }}/docs/graphql -f
 
       - name: Push files
-        working-directory: ./${{ github.env.TARGET_REPO_NAME }}
+        working-directory: ./${{ env.TARGET_REPO_NAME }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
