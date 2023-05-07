@@ -1,5 +1,5 @@
 # Interview Question API
-A full stack interview question API 
+Full stack interview question API 
 
 <details>
 <summary>
@@ -7,9 +7,14 @@ Table of contents
 </summary>
 
 - [Interview Question API](#interview-question-api)
+  - [Considerations](#considerations)
+    - [Question Storage](#question-storage)
   - [Continuous Integration](#continuous-integration)
 </details>
 
+## Considerations
+### Question Storage
+The questions are stored in a JSON file since they will not need to change between releases, and I don't plan on adding any new questions at the moment
 
 ## Continuous Integration
 
