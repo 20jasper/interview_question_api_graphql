@@ -7,11 +7,8 @@ pub struct Query;
 
 #[Object]
 impl Query {
-	async fn questions(&self) -> Questions {
-		match serde_json::from_str(&get_questions_json()) {
-			Ok(json) => json,
-			Err(error) => panic!("Failed to parse json to type Questions: {error}"),
-		}
+	async fn questions(&self) -> Result<Questions, serde_json::Error> {
+		serde_json::from_str(&get_questions_json())
 	}
 }
 
