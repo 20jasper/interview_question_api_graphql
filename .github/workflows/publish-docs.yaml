@@ -50,7 +50,7 @@ jobs:
           git add .
 
           # if there are changes between origin and local
-          if !git diff-index --quiet HEAD; then
+          if ! git diff-index --quiet HEAD; then
             git commit -m "update GraphQL Docs!"
             git push
             echo ${{ env.SUCCESS_MESSAGE }}
