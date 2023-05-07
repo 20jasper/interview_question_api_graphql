@@ -1,7 +1,7 @@
 use std::fs::read_to_string;
 
-use async_graphql::{Enum, Object, SimpleObject};
-use serde::{Deserialize, Serialize};
+use async_graphql::{Object, SimpleObject};
+use serde::Deserialize;
 
 pub struct Query;
 
@@ -40,7 +40,7 @@ fn get_questions_json() -> String {
 }
 
 /// A top level field for all questions
-#[derive(SimpleObject, Deserialize, Serialize)]
+#[derive(SimpleObject, Deserialize)]
 struct Questions {
 	// needed since &str is not owned, and serde cannot deserialize borrowed data
 	category: QuestionCategory,
@@ -50,20 +50,20 @@ struct Questions {
 /// The main categories of interview questions
 /// Behavioral is more broad, regarding reactions to a situation
 /// Technical is more targeted to assess knowledge in a domain
-#[derive(SimpleObject, Serialize, Deserialize)]
+#[derive(SimpleObject, Deserialize)]
 struct QuestionCategory {
 	behavioral: Vec<Question>,
 	technical: TechnicalQuestionSubcategory,
 }
 
 /// Broad questions
-#[derive(SimpleObject, Serialize, Deserialize)]
+#[derive(SimpleObject, Deserialize)]
 struct Question {
 	html_content: String,
 }
 
 /// Domains of knowledge common in front end interviews
-#[derive(SimpleObject, Serialize, Deserialize)]
+#[derive(SimpleObject, Deserialize)]
 struct TechnicalQuestionSubcategory {
 	html: Vec<Question>,
 	css: Vec<Question>,
