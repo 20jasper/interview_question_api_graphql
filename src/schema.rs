@@ -32,6 +32,7 @@ struct QuestionCategory {
 /// Broad questions
 #[derive(SimpleObject, Deserialize)]
 struct Question {
+	#[serde(rename(deserialize = "htmlContent"))]
 	html_content: String,
 }
 
@@ -40,7 +41,10 @@ struct Question {
 struct TechnicalQuestionSubcategory {
 	html: Vec<Question>,
 	css: Vec<Question>,
+	#[serde(rename(deserialize = "javaScript"))]
 	java_script: Vec<Question>,
+	#[serde(rename(deserialize = "nodeJs"))]
 	node_js: Vec<Question>,
+	#[serde(rename(deserialize = "csTheory"))]
 	cs_theory: Vec<Question>,
 }
