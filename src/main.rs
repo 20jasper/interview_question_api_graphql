@@ -6,6 +6,7 @@ use std::env;
 use std::net::SocketAddr;
 
 mod questions;
+mod schema;
 
 #[tokio::main]
 async fn main() {
