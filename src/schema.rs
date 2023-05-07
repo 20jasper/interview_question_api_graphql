@@ -10,10 +10,20 @@ impl Query {
 	async fn questions(&self) -> Questions {
 		Questions {
 			category: QuestionCategory {
-				behavioral: vec![BehavioralQuestion {
+				behavioral: vec![Question {
 					html_content: "hi".to_owned(),
 				}],
-				technical: vec![],
+				technical: TechnicalQuestionSubcategory {
+					html: vec![Question {
+						html_content: "hello".to_owned(),
+					}],
+					css: vec![],
+					java_script: vec![Question {
+						html_content: "Beans".to_owned(),
+					}],
+					node_js: vec![],
+					cs_theory: vec![],
+				},
 			},
 		}
 		// serde_json::from_str(&get_questions_json())
@@ -37,32 +47,27 @@ struct Questions {
 }
 
 // this must be a struct since GraphQL enums may only contain unit variants
-/// The main categories of interview questions—behavioral being more broad and technical more targeted
+/// The main categories of interview questions
+/// Behavioral is more broad, regarding reactions to a situation
+/// Technical is more targeted to assess knowledge in a domain
 #[derive(SimpleObject, Serialize, Deserialize)]
 struct QuestionCategory {
-	behavioral: Vec<BehavioralQuestion>,
-	technical: Vec<TechnicalQuestion>,
+	behavioral: Vec<Question>,
+	technical: TechnicalQuestionSubcategory,
 }
 
-/// Broad questions regarding reactions to a situation
+/// Broad questions
 #[derive(SimpleObject, Serialize, Deserialize)]
-struct BehavioralQuestion {
+struct Question {
 	html_content: String,
-}
-
-/// Targeted questions to assess knowledge in a domain
-#[derive(SimpleObject, Serialize, Deserialize)]
-struct TechnicalQuestion {
-	html_content: String,
-	subcategory: TechnicalQuestionSubcategory,
 }
 
 /// Domains of knowledge common in front end interviews
-#[derive(Enum, Copy, Clone, Eq, PartialEq, Serialize, Deserialize)]
-enum TechnicalQuestionSubcategory {
-	Html,
-	Css,
-	JavaScript,
-	NodeJs,
-	CSTheory,
+#[derive(SimpleObject, Serialize, Deserialize)]
+struct TechnicalQuestionSubcategory {
+	html: Vec<Question>,
+	css: Vec<Question>,
+	java_script: Vec<Question>,
+	node_js: Vec<Question>,
+	cs_theory: Vec<Question>,
 }
