@@ -43,7 +43,7 @@ struct Question {
 	html_content: String,
 }
 
-/// Domains of knowledge common in front end interviews
+/// Domains of knowledge common in full stack interviews
 #[derive(SimpleObject, Deserialize)]
 struct TechnicalQuestionSubcategory {
 	html: Vec<Question>,
