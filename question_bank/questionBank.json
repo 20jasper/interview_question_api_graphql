@@ -1,6 +1,5 @@
 {
-  "questions": {
-    "questionCategory": {
+  "category": {
       "behavioral": [
         {
           "htmlContent": "Give me an example of the project or initiative that you started on your own. It can be a non&minus;business one. What prompted you to get started?'"
@@ -70,7 +69,6 @@
         }
       ],
       "technical": {
-        "subtype": {
           "HTML": [
             {
               "htmlContent": "What does a doctype do?"
@@ -534,8 +532,6 @@
               "htmlContent": "Demonstrate Quicksort and explain when you might use it."
             }
           ]
-        }
-      }
     }
   }
 }
