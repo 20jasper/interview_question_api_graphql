@@ -1,41 +1,39 @@
 use std::fs::read_to_string;
 
-use async_graphql::{Object, SimpleObject};
+use async_graphql::{Context, EmptyMutation, EmptySubscription, Object, Schema, SimpleObject};
 use serde::Deserialize;
 
 pub struct Query;
 
 #[Object]
 impl Query {
-	async fn questions(&self) -> Questions {
-		Questions {
-			category: QuestionCategory {
-				behavioral: vec![Question {
-					html_content: "hi".to_owned(),
-				}],
-				technical: TechnicalQuestionSubcategory {
-					html: vec![Question {
-						html_content: "hello".to_owned(),
-					}],
-					css: vec![],
-					java_script: vec![Question {
-						html_content: "Beans".to_owned(),
-					}],
-					node_js: vec![],
-					cs_theory: vec![],
-				},
-			},
-		}
-		// serde_json::from_str(&get_questions_json())
+	async fn questions<'ctx>(
+		&self,
+		ctx: &Context<'ctx>,
+	) -> Result<&'ctx Questions, async_graphql::Error> {
+		ctx.data::<Questions>()
 	}
 }
 
-fn get_questions_json() -> String {
+pub async fn build_schema() -> Schema<Query, EmptyMutation, EmptySubscription> {
+	let json = get_questions().await;
+
+	Schema::build(Query, EmptyMutation, EmptySubscription)
+		.data(json)
+		.finish()
+}
+
+async fn get_questions() -> Questions {
 	const PATH: &str = "./question_bank/questionBank.json";
 
-	match read_to_string(PATH) {
+	let questions_json = match read_to_string(PATH) {
 		Ok(file) => file,
 		Err(error) => panic!("Failed to open file at {PATH}: {error}"),
+	};
+
+	match serde_json::from_str(&questions_json) {
+		Ok(questions) => questions,
+		Err(error) => panic!("Could not parse json to type Questions: {error}"),
 	}
 }
 
