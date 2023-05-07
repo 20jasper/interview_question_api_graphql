@@ -7,8 +7,16 @@ pub struct Query;
 
 #[Object]
 impl Query {
-	async fn questions(&self) -> Result<Questions, serde_json::Error> {
-		serde_json::from_str(&get_questions_json())
+	async fn questions(&self) -> Questions {
+		Questions {
+			category: QuestionCategory {
+				behavioral: vec![BehavioralQuestion {
+					html_content: "hi".to_owned(),
+				}],
+				technical: vec![],
+			},
+		}
+		// serde_json::from_str(&get_questions_json())
 	}
 }
 
