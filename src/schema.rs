@@ -1,6 +1,4 @@
-use std::fs::read_to_string;
-
-use async_graphql::{Context, EmptyMutation, EmptySubscription, Object, Schema, SimpleObject};
+use async_graphql::{Context, Object, SimpleObject};
 use serde::Deserialize;
 
 pub struct Query;
@@ -15,32 +13,9 @@ impl Query {
 	}
 }
 
-pub async fn build_schema() -> Schema<Query, EmptyMutation, EmptySubscription> {
-	let json = get_questions().await;
-
-	Schema::build(Query, EmptyMutation, EmptySubscription)
-		.data(json)
-		.finish()
-}
-
-async fn get_questions() -> Questions {
-	const PATH: &str = "./question_bank/questionBank.json";
-
-	let questions_json = match read_to_string(PATH) {
-		Ok(file) => file,
-		Err(error) => panic!("Failed to open file at {PATH}: {error}"),
-	};
-
-	match serde_json::from_str(&questions_json) {
-		Ok(questions) => questions,
-		Err(error) => panic!("Could not parse json to type Questions: {error}"),
-	}
-}
-
 /// A top level field for all questions
 #[derive(SimpleObject, Deserialize)]
-struct Questions {
-	// needed since &str is not owned, and serde cannot deserialize borrowed data
+pub struct Questions {
 	category: QuestionCategory,
 }
 
