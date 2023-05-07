@@ -1,5 +1,5 @@
 # Interview Question API
-A full stack interview question API 
+Full stack interview question API 
 
 <details>
 <summary>
@@ -7,9 +7,22 @@ Table of contents
 </summary>
 
 - [Interview Question API](#interview-question-api)
+  - [Documentation](#documentation)
+    - [GraphQL Schema](#graphql-schema)
+  - [Considerations](#considerations)
+    - [Question Storage](#question-storage)
   - [Continuous Integration](#continuous-integration)
 </details>
 
+## Documentation
+Documentation for the API can be found at https://20jasper.github.io/interview_question_api_graphql_docs/
+
+### [GraphQL Schema](https://20jasper.github.io/interview_question_api_graphql_docs/docs/graphql)
+A searchable reference for the API GraphQL Schema generated with GraphDoc
+
+## Considerations
+### Question Storage
+The questions are stored in a JSON file since they will not need to change between releases, and I don't plan on adding any new questions at the moment
 
 ## Continuous Integration
 
@@ -34,7 +47,7 @@ Table of contents
   </tr>
   <tr>
     <td><code>publish-docs.yaml</code></td>
-    <td>Generates GraphQL docs and then pushes to <a href="https://github.com/20jasper/interview_question_api_graphql_docs">the docs repo</a></td>
+    <td>Generates <a href="#graphql-schema">GraphQL docs</a> and then pushes to <a href="https://github.com/20jasper/interview_question_api_graphql_docs">the docs repo</a></td>
     <td>Called in <code>deploy</code></td>
   </tr>
 </tbody>
