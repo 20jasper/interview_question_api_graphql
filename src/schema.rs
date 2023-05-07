@@ -21,15 +21,22 @@ pub struct Questions {
 
 // this must be a struct since GraphQL enums may only contain unit variants
 /// The main categories of interview questions
-/// Behavioral is more broad, regarding reactions to a situation
-/// Technical is more targeted to assess knowledge in a domain
 #[derive(SimpleObject, Deserialize)]
 struct QuestionCategory {
-	behavioral: Vec<Question>,
-	technical: TechnicalQuestionSubcategory,
+	behavioral: BehavioralQuestions,
+	technical: TechnicalQuestions,
 }
 
-/// Broad questions
+/// Broader questions regarding reactions to a situation
+type BehavioralQuestions = Vec<Question>;
+
+/// Questions assessing knowledge in a particular domain
+#[derive(SimpleObject, Deserialize)]
+struct TechnicalQuestions {
+	subcategory: TechnicalQuestionSubcategory,
+}
+
+/// HTML encoded interview questions
 #[derive(SimpleObject, Deserialize)]
 struct Question {
 	#[serde(rename(deserialize = "htmlContent"))]
