@@ -47,7 +47,7 @@ The questions are stored in a JSON file since they will not need to change betwe
   </tr>
   <tr>
     <td><code>publish-docs.yaml</code></td>
-    <td>Generates GraphQL docs and then pushes to <a href="https://github.com/20jasper/interview_question_api_graphql_docs">the docs repo</a></td>
+    <td>Generates <a href="#graphql-schema">GraphQL docs</a> and then pushes to <a href="https://github.com/20jasper/interview_question_api_graphql_docs">the docs repo</a></td>
     <td>Called in <code>deploy</code></td>
   </tr>
 </tbody>
