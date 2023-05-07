@@ -16,7 +16,7 @@ impl Query {
 }
 
 fn get_questions_json() -> String {
-	const PATH: &str = "../question_bank/questionBank.json";
+	const PATH: &str = "./question_bank/questionBank.json";
 
 	match read_to_string(PATH) {
 		Ok(file) => file,
