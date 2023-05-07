@@ -4,6 +4,7 @@ use std::fs::read_to_string;
 
 use crate::schema::{Query, Questions};
 
+/// Import JSON from the question bank file then convert to a rust `Questions` struct
 async fn get_questions() -> Questions {
 	const PATH: &str = "./question_bank/questionBank.json";
 
@@ -18,17 +19,12 @@ async fn get_questions() -> Questions {
 	}
 }
 
-async fn build_schema() -> Schema<Query, EmptyMutation, EmptySubscription> {
-	let json = get_questions().await;
-
-	Schema::build(Query, EmptyMutation, EmptySubscription)
-		.data(json)
-		.finish()
-}
-
 /// takes in a request body and resolves all the fields in the GraphQL query
+/// Has access to all interview questions in its context
 pub async fn graphql_handler(req: GraphQLRequest) -> GraphQLResponse {
-	let schema = build_schema().await;
+	let schema = Schema::build(Query, EmptyMutation, EmptySubscription)
+		.data(get_questions().await)
+		.finish();
 
 	schema
 		.execute(req.into_inner())
