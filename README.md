@@ -7,10 +7,18 @@ Table of contents
 </summary>
 
 - [Interview Question API](#interview-question-api)
+  - [Documentation](#documentation)
+    - [GraphQL Schema](#graphql-schema)
   - [Considerations](#considerations)
     - [Question Storage](#question-storage)
   - [Continuous Integration](#continuous-integration)
 </details>
+
+## Documentation
+Documentation for the API can be found at https://20jasper.github.io/interview_question_api_graphql_docs/
+
+### [GraphQL Schema](https://20jasper.github.io/interview_question_api_graphql_docs/docs/graphql)
+A searchable reference for the API GraphQL Schema generated with GraphDoc
 
 ## Considerations
 ### Question Storage
