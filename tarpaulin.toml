@@ -1,0 +1,10 @@
+[report]
+out = ["Html", "Xml"]
+output-dir = "./coverage"
+
+[run]
+# Specify the directory containing tests
+tests = ["src"]
+# don't recompile
+skip-clean = true
+no-fail-fast = true

@@ -12,6 +12,8 @@ Table of contents
   - [Considerations](#considerations)
     - [Question Storage](#question-storage)
   - [Continuous Integration](#continuous-integration)
+  - [Testing](#testing)
+    - [Test Coverage](#test-coverage)
 </details>
 
 ## Documentation
@@ -52,3 +54,17 @@ The questions are stored in a JSON file since they will not need to change betwe
   </tr>
 </tbody>
 </table>
+
+## Testing
+
+Tests can be run with `cargo test`
+
+### Test Coverage
+To run test coverage, first install tarpaulin
+```shell
+cargo install cargo-tarpaulin
+```
+Then to generate HTML and XML coverage reports, run 
+```shell
+cargo tarpaulin
+```
